@@ -1,11 +1,10 @@
-
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
-from wtforms.validators import DataRequired
-
+from wtforms.validators import DataRequired, NumberRange
 
 class CharacterForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    strength = IntegerField('Strength', validators=[DataRequired()])
-    agility = IntegerField('Agility', validators=[DataRequired()])
+    strength = IntegerField('Strength', validators=[DataRequired(), NumberRange(min=0, max=10)])
+    agility = IntegerField('Agility', validators=[DataRequired(), NumberRange(min=0, max=10)])
+    endurance = IntegerField('Endurance', validators=[DataRequired(), NumberRange(min=0, max=10)])
     submit = SubmitField('Create Character')

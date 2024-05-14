@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Character List</title>
 </head>
 <body>
-
+    <h1>Characters</h1>
+    <ul>
+        {% for character in characters %}
+            <li>
+                <a href="{{ url_for('character_detail', character_id=character.id) }}">{{ character.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('create_character') }}">Create New Character</a>
 </body>
 </html>
