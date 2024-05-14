@@ -36,4 +36,4 @@ def create_character():
 if __name__ == '__main__':
     app.run(debug=True)
 
-#Очень важно!!
+#оЧЕНЬ ВАЖНО!!
