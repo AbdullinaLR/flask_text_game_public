@@ -1,28 +1,23 @@
 from flask import Flask
-#
-# app = Flask(__name__)
-#
-#
-# @app.route('/')
-# def hello_world():  # put application's code here
-#     return 'Hello World!'
-#
-#
-# if __name__ == '__main__':
-#     app.run()
 from flask import Flask, render_template, request, redirect, url_for
+from flask_restful import Api, Resource
 from models import db, Character
 from forms import CharacterForm
 
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///characters.db'
-db.init_app(app)
+api = Api()
+class Main(Resource): ## сможем обрабатывать гет пост и делит запросы
+    def get(self):
+        return {"info":"Some info", "num": 56}## ссоздаем джесон объект
+
+## обработка url адреа
+api.add_resource(Main,"/api/main")
+api.init_app(app)
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
 @app.route('/create_character', methods=['GET', 'POST'])
 def create_character():
     form = CharacterForm()
@@ -33,9 +28,6 @@ def create_character():
         return redirect(url_for('index'))
     return render_template('create_character.html', form=form)
 
-if __name__ == '__main__':
-    app.run(debug=True)
 
-#ffffffffffffffffffffffffffffffffffffffFF
-
-# Писала Ангелина  )))))
+if __name__ == "__main__":
+    app.run(debug=True, port=3000, host="127.0.0.1") ## любые ошибки и уведы не выводятся в терминале
